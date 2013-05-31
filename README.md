@@ -46,7 +46,7 @@ Contributing
 1. Fork the repository on GitHub
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
-6. Submit a Pull Request using Github
+6. Submit a Pull Request using GitHub
 
 License and Authors
 -------------------
