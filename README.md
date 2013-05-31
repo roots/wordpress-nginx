@@ -1,6 +1,12 @@
 wordpress-nginx Cookbook
 ========================
-Configures Nginx for a WordPress site with php-fpm
+Chef cookbook that Configures Nginx for a WordPress site with php-fpm.
+
+Provides a base Nginx config for common WordPress settings at `/etc/nginx/wordpress.conf`.
+
+Any sites specified through the attribute below will be added to `/etc/nginx/sites-available/wordpress` and include `wordpress.conf`.
+
+The `wordpress` site will be enabled as well.
 
 Requirements
 ------------
