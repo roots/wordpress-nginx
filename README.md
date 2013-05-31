@@ -37,9 +37,9 @@ Just include `wordpress-nginx` in your node's `run_list`:
 
 Contributing
 ------------
-1. Fork the repository on Github
+1. Fork the repository on GitHub
 2. Create a named feature branch (like `add_component_x`)
-3. Write you change
+3. Write your change
 6. Submit a Pull Request using Github
 
 License and Authors
