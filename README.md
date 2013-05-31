@@ -10,29 +10,15 @@ Requirements
 Attributes
 ----------
 
-e.g.
-#### wordpress-nginx::default
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['wordpress-nginx']['sites']</tt></td>
-    <td>Hash</td>
-    <td>Sites to create and enable</td>
-    <td>
-      ```ruby
-        'default' => {
-          'hosts' => 'localhost',
-          'root'  => '/srv/www/default'
-        }
-      ```
-    </td>
-  </tr>
-</table>
+Only one attribute. Default is:
+```ruby
+default['wordpress']['sites'] = {
+  'default' => {
+    'hosts' => 'localhost',
+    'root'  => '/srv/www/default'
+  }
+}
+```
 
 Usage
 -----
