@@ -20,7 +20,7 @@ template "#{node['nginx']['dir']}/sites-available/wordpress" do
   mode     00644
   notifies :reload, 'service[nginx]'
   variables(
-    :servers => node['wordpress_nginx']['sites']
+    :sites => node['wordpress_nginx']['sites']
   )
 end
 
