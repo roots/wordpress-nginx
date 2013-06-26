@@ -6,8 +6,8 @@ server {
   access_log   <%= node['nginx']['log_dir'] %>/<%= name %>.access.log;
   error_log    <%= node['nginx']['log_dir'] %>/<%= name %>.error.log;
 
-  <% if node['wordpress_nginx']['custom_rewrites'] -%>
-  <%= node['wordpress_nginx']['custom_rewrites'] %>
+  <% if settings['rewrites'] -%>
+  <%= settings['rewrites'] %>
   <% end -%>
 
   include      /etc/nginx/wordpress.conf;
