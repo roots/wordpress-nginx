@@ -13,16 +13,35 @@ Any sites specified through the attribute below will be added to `/etc/nginx/sit
 
 * `node['wordpress_nginx']['fastcgi_read_timeout']` -  Timeout for reading a response from the FastCGI server (default=`3600s`)
 * `node['wordpress_nginx']['static_file_expiry']` - Expiry time for static assets `js|css|png|jpg|jpeg|gif|ico` (default=`24h`)
+* `node['wordpress_nginx']['custom_rewrites']` - Used to add additional custom rewrites (default=`nil`)
 * `node['wordpress_nginx']['sites']` - nginx sites to enable. Example:
 
 ```ruby
-node['wordpress_nginx']['sites'] = {
-  'default' => {
-    'hosts' => 'localhost',
-    'root'  => '/srv/www/default'
+'wordpress_nginx' => {
+  'sites' => {
+    'default' => {
+      'hosts' => 'localhost',
+      'root'  => '/srv/www/default'
+    }
   }
 }
 ```
+
+### Custom Rewrites
+
+If your WordPress install requires additional rewrites or `location` directives, you can provide via the `node['wordpress_nginx']['custom_rewrites']` attribute. They will be added **before** `wordpress.conf` is included for a site.
+
+For example, when using Vagrant, you could read them in from a file to avoid writing them all inline. In your `Vagrantfile`:
+
+```ruby
+chef.json = {
+  'wordpress_nginx' => {
+    'custom_rewrites' => File.read('config/rewrites.conf')
+  }
+}
+```
+
+
 
 ## Usage
 
