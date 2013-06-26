@@ -11,9 +11,12 @@ Any sites specified through the attribute below will be added to `/etc/nginx/sit
 
 ## Attributes
 
-Only one attribute. Default is:
+* `node['wordpress_nginx']['fastcgi_read_timeout']` -  Timeout for reading a response from the FastCGI server (default=`3600s`)
+* `node['wordpress_nginx']['static_file_expiry']` - Expiry time for static assets `js|css|png|jpg|jpeg|gif|ico` (default=`24h`)
+* `node['wordpress_nginx']['sites']` - nginx sites to enable. Example:
+
 ```ruby
-default['wordpress']['sites'] = {
+node['wordpress_nginx']['sites'] = {
   'default' => {
     'hosts' => 'localhost',
     'root'  => '/srv/www/default'

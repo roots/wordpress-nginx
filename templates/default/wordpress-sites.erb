@@ -3,8 +3,8 @@ server {
   listen       80;
   server_name  <%= settings['hosts'] %>;
   root         <%= settings['root'] %>;
-  access_log   /var/log/nginx/<%= name %>.access.log;
-  error_log    /var/log/nginx/<%= name %>.error.log;
+  access_log   <%= node['nginx']['log_dir'] %>/<%= name %>.access.log;
+  error_log    <%= node['nginx']['log_dir'] %>/<%= name %>.error.log;
   include      /etc/nginx/wordpress.conf;
 }
 <% end %>
