@@ -6,7 +6,8 @@ Any sites specified through the attribute below will be added to `/etc/nginx/sit
 
 ## Requirements
 
-* nginx
+* [nginx](http://community.opscode.com/cookbooks/nginx)
+* [php-fpm](http://community.opscode.com/cookbooks/php-fpm)
 
 ## Attributes
 
