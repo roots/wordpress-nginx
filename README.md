@@ -1,8 +1,6 @@
 # wordpress-nginx Chef Cookbook
 
-Chef cookbook that configures Nginx for a WordPress site with PHP-FPM. Provides a base Nginx config for common WordPress settings at `/etc/nginx/wordpress.conf`.
-
-Any sites specified through the attribute below will be added to `/etc/nginx/sites-available/wordpress` and include `wordpress.conf`. The `wordpress` site will be enabled as well.
+Chef cookbook that provides a LWRP for WordPress Nginx sites with PHP-FPM. Provides a base Nginx config for common WordPress settings at `/etc/nginx/wordpress.conf`.
 
 ## Requirements
 
@@ -11,57 +9,32 @@ Any sites specified through the attribute below will be added to `/etc/nginx/sit
 
 ## Attributes
 
-* `node['wordpress_nginx']['fastcgi_read_timeout']` -  Timeout for reading a response from the FastCGI server (default=`3600s`)
+* `node['wordpress_nginx']['default_host']` - Default for Nginx `server` directive (default=`localhost`)
+* `node['wordpress_nginx']['fastcgi_read_timeout']` - Timeout for reading a response from the FastCGI server (default=`3600s`)
 * `node['wordpress_nginx']['static_file_expiry']` - Expiry time for static assets `js|css|png|jpg|jpeg|gif|ico` (default=`24h`)
-* `node['wordpress_nginx']['sites']` - nginx sites to enable. Example:
-
-```ruby
-'wordpress_nginx' => {
-  'sites' => {
-    'default' => {
-      'hosts'    => 'localhost',
-      'root'     => '/srv/www/default',
-      'rewrites' => nil
-    }
-  }
-}
-```
-
-### Custom Rewrites
-
-If your WordPress install requires additional rewrites or `location` directives, you can provide them via the `rewrites` attribute under `sites`. They will be added **before** `wordpress.conf` is included for a site.
-
-For example, when using Vagrant, you could read them in from a file to avoid writing them all inline. In your `Vagrantfile`:
-
-```ruby
-chef.json = {
-  'wordpress_nginx' => {
-    'sites' => {
-      'example.com' => {
-        'hosts'    => 'example.com',
-        'root'     => '/srv/www/example.com',
-        'rewrites' => File.read('config/nginx-rewrites.conf')
-      }
-    }
-  }
-}
-```
-
-
 
 ## Usage
 
-### wordpress-nginx::default
+Basic usage with only host and document root:
 
-Just include `wordpress-nginx` in your node's `run_list`:
+```ruby
+wordpress_nginx_site 'example.com' do
+  host 'example.com'
+  root '/srv/www/example.com'
+end
+```
 
-```json
-{
-  "name": "my_node",
-  "run_list": [
-    "recipe[wordpress-nginx]"
-  ]
-}
+This resource would create an Nginx site at `/etc/nginx/sites-available/example.com` and enable it.
+
+If you need to add additional custom config options, you can use the `code` attribute:
+
+```ruby
+wordpress_nginx_site 'example.com' do
+  host 'example.com'
+  root '/srv/www/example.com'
+  code "include #{node['nginx']['dir']}/custom.conf;"
+  notifies :reload, 'service[nginx]'
+end
 ```
 
 ## Contributing

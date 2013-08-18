@@ -1,15 +1,13 @@
-<% @sites.each do |name, settings| %>
 server {
   listen       80;
-  server_name  <%= settings['hosts'] %>;
-  root         <%= settings['root'] %>;
-  access_log   <%= node['nginx']['log_dir'] %>/<%= name %>.access.log;
-  error_log    <%= node['nginx']['log_dir'] %>/<%= name %>.error.log;
+  server_name  <%= @host %>;
+  root         <%= @root %>;
+  access_log   <%= node['nginx']['log_dir'] %>/<%= @name %>.access.log;
+  error_log    <%= node['nginx']['log_dir'] %>/<%= @name %>.error.log;
 
-  <% if settings['rewrites'] -%>
-  <%= settings['rewrites'] %>
+  <% if @code -%>
+  <%= @code %>
   <% end -%>
 
-  include      /etc/nginx/wordpress.conf;
+  include <%= node['nginx']['dir'] %>/wordpress.conf;
 }
-<% end %>
