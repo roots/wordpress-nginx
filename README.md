@@ -9,7 +9,6 @@ Chef cookbook that provides a LWRP for WordPress Nginx sites with PHP-FPM. Provi
 
 ## Attributes
 
-* `node['wordpress_nginx']['default_host']` - Default for Nginx `server` directive (default=`localhost`)
 * `node['wordpress_nginx']['fastcgi_read_timeout']` - Timeout for reading a response from the FastCGI server (default=`3600s`)
 * `node['wordpress_nginx']['static_file_expiry']` - Expiry time for static assets `js|css|png|jpg|jpeg|gif|ico` (default=`24h`)
 
