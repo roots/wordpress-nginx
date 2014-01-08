@@ -11,6 +11,7 @@ Chef cookbook that provides a LWRP for WordPress Nginx sites with PHP-FPM. Provi
 
 * `node['wordpress_nginx']['fastcgi_read_timeout']` - Timeout for reading a response from the FastCGI server (default=`3600s`)
 * `node['wordpress_nginx']['static_file_expiry']` - Expiry time for static assets `js|css|png|jpg|jpeg|gif|ico` (default=`24h`)
+* `node['wordpress_nginx']['php_fpm']['listen']` - Listen socket for PHP-FPM (default=`/var/run/php-fpm-www.sock`)
 
 ## Usage
 
@@ -35,6 +36,10 @@ wordpress_nginx_site 'example.com' do
   notifies :reload, 'service[nginx]'
 end
 ```
+
+## CHANGELOG
+
+* [2013-01-08] Removed usage of `node['php-fpm']['pool']['www']['listen']` attribute (removed from php-fpm cookbook as of 0.6.3). Replaced with local attribute `node['wordpress_nginx']['php_fpm']['listen']`.
 
 ## Contributing
 
