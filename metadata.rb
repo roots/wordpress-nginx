@@ -1,4 +1,4 @@
-name             'wordpress_nginx'
+name             'wordpress-nginx'
 maintainer_email 'scott.walkinshaw@gmail.com'
 license          'MIT'
 description      'Installs/Configures Nginx sites for WordPress with PHP-FPM'
