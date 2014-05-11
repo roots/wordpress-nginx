@@ -18,7 +18,7 @@ Chef cookbook that provides a LWRP for WordPress Nginx sites with PHP-FPM. Provi
 Basic usage with only host and document root:
 
 ```ruby
-wordpress-nginx_site 'example.com' do
+wordpress_nginx_site 'example.com' do
   host 'example.com'
   root '/srv/www/example.com'
 end
@@ -29,7 +29,7 @@ This resource would create an Nginx site at `/etc/nginx/sites-available/example.
 If you need to add additional custom config options, you can use the `code` attribute:
 
 ```ruby
-wordpress-nginx_site 'example.com' do
+wordpress_nginx_site 'example.com' do
   host 'example.com'
   root '/srv/www/example.com'
   code "include #{node['nginx']['dir']}/custom.conf;"
