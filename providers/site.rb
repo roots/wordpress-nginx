@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: wordpress_nginx
+# Cookbook Name:: wordpress-nginx
 # Provider:: site
 #
 
@@ -9,7 +9,7 @@ action :create do
     owner    'root'
     group    'root'
     mode     00644
-    cookbook 'wordpress_nginx'
+    cookbook 'wordpress-nginx'
   end
 
   template "#{node['nginx']['dir']}/sites-available/#{new_resource.name}" do
@@ -17,7 +17,7 @@ action :create do
     owner    'root'
     group    'root'
     mode     00644
-    cookbook 'wordpress_nginx'
+    cookbook 'wordpress-nginx'
     variables(
       :name => new_resource.name,
       :host => new_resource.host,
