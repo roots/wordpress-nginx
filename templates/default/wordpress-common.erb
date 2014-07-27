@@ -12,6 +12,16 @@ location / {
   try_files $uri $uri/ /index.php?$args;
 }
 
+# Workaround to fix post previews.
+# Preview pages check the active blog against the DB, and roots overrides those options.
+# This results in a failed check at a WP level and 404 pages. This is really Wordpress' fault.
+if ($query_string ~* "preview_id=") {
+  rewrite ^(.*)/?$ /wp/?pagename=$1&$args break;
+}
+if ($query_string ~* "preview=true") {
+  rewrite ^(.*)$ /wp/$1 break;
+}
+
 # Add trailing slash to */wp-admin requests
 rewrite /wp-admin$ $scheme://$host$uri/ permanent;
 
